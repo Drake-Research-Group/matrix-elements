@@ -1,0 +1,17 @@
+services:
+  library:
+    image: drakelib-dq
+    container_name: drakelib-dq
+    ports:
+      - "8080:8080"
+  matrix-elements-dq:
+    build: 
+      context: . 
+      dockerfile: dockerfile
+    image: matrix-elements-dq
+    environment:
+      - LIBRARY_URL=http://drakelib:8080
+    depends_on:
+      - library
+    ports:
+      - "5000:5000"
